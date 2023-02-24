@@ -84,7 +84,7 @@ async function seed(){
 
     // todo - Show in table.
     for(let i = 0; i < LOGGER.length; i++){
-        console.log(`${i+1}. ${LOGGER[i]}`);
+        console.log(`${chalk.yellow(`${i+1}/${LOGGER.length}`)}. ${LOGGER[i]}`);
     }
 
     console.log(' ');
