@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/mongoose/User');
 const { db } = require('../helpers');
 
 async function create (data) {
