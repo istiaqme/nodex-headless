@@ -12,7 +12,7 @@ async function seed(){
     
     console.log(chalk.yellow("********************"));
     console.log(chalk.white("Lulu is starting to seed Mongo Database."));
-    console.log(chalk.magenta("⚠ Caution: Current Documents Will Be Deleted. ⚠"));
+    console.log(chalk.magenta(" ======== Caution: Current Documents Will Be Deleted. ========"));
     console.log(chalk.yellow("********************"));
 
     const { database: { mongodb }, namespaces } = lulu.config;
@@ -27,14 +27,14 @@ async function seed(){
     });
     mongoose.connection.on('error', (error) => console.log(error));
     mongoose.connection.on('open', () => {
-        console.log(chalk.bgGreenBright(`✓✓✓ MongoDB connected on ${MONGODB_URL}`))
+        console.log(chalk.green(`✓ MongoDB connected on ${MONGODB_URL}`))
     });
 
-
     
-
     const DATASETS_DIR = lulu.join.withBase(`${namespaces.mongoose}/${mongodb.seederDir}/${mongodb.seederDatasetsDir}`);
     const files = await fileNames(DATASETS_DIR);
+    const LOGGER = [];
+
     for(let i = 0; i < files.length; i++){
         const file = files[i];
         const splittedFile = file.split('.');
@@ -53,24 +53,52 @@ async function seed(){
                 
                 const endTime = new Date().getTime();
 
-                console.log(chalk.green(`✓ Model ${splittedFile[0]} - Seeding Successful - ${endTime - startTime} ms.`));
+                LOGGER.push(chalk.green(`✓ Model: ${splittedFile[0]} - Collection: ${ThisModel.collection.collectionName} - Seeding Successful - ${endTime - startTime} ms.`));
             }
             else{
-                console.log(chalk.red(`☠ Model ${splittedFile[0]} - Seeding Failed - Dataset Format Error.`));
+                LOGGER.push(chalk.red(`⚠ Model: ${splittedFile[0]} - Collection: ${ThisModel.collection.collectionName} - Seeding Failed - Dataset Format Error.`));
             }
             
         }
         else{
-            console.log(chalk.red(`☠ Model ${splittedFile[0]} - Seeding Failed - Model Doesn't Exist.`));
+            LOGGER.push(chalk.red(`⚠ Model: ${splittedFile[0]} - Collection: [Error: Model Not Found] - Seeding Failed - Model Doesn't Exist.`));
         }
 
         
     }
 
+    console.log('.');
+    console.log('.');
+    
+
+    console.log(chalk.yellow(`Found ${files.length} migrations.`));
+
+    console.log('.');
+    console.log('.');
+    console.log(chalk.yellow(`Attempting to migrate.`));
+    console.log('.');
+    console.log('.');
+    console.log('.');
+    console.log(' ');
+    console.log(' ');
+
+    // todo - Show in table.
+    for(let i = 0; i < LOGGER.length; i++){
+        console.log(`${i+1}. ${LOGGER[i]}`);
+    }
+
+    console.log(' ');
+    console.log(' ');
+    console.log('.');
+    console.log('.');
+    console.log('.');
+    console.log('.');
+
     console.log(chalk.yellow("********************"));
     console.log(chalk.white("Lulu has completed seeding Mongo Database."));
     console.log(chalk.yellow("********************"));
 
+    mongoose.connection.close();
     return;
 }
 
