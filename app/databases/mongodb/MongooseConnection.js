@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const config = require('../../../app.config');
-const wordart = require('../../misc/wordart')
+const config = lulu.use('app.config');
+const wordart = lulu.use('app/misc/wordart');
 
 
 module.exports = {

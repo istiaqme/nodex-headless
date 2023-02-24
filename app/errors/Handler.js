@@ -16,9 +16,6 @@ module.exports = function (error, res) {
     else if(error instanceof TypeError){
         response.dispatch(buildMessage(error), buildData(error), res, 500);
     }
-    else if(error instanceof ValidationError){
-        response.dispatch(buildMessage(error), buildData(error), res, 400);
-    }
     else if(error instanceof require('./JoiValidationError')){
         response.dispatch(buildMessage(error), buildData(error), res, 400);
     }

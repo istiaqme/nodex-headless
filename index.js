@@ -1,23 +1,24 @@
+require('./boot');
 const express = require('express');
 const server = express();
 require('dotenv').config();
 const cors = require('cors');
 const chalk = require('chalk');
-const config = require('./app.config');
-const wordart = require('./app/misc/wordart');
+const config = lulu.use('app.config');
+const wordart = lulu.use('app/misc/wordart');
+
 
 server.use(cors(config.app.corsOptions));
-
 server.use(express.json({limit: '50mb'}));
 server.use(express.urlencoded({extended: true, limit: '50mb'}));
 
-server.use(require('./app/middlewares/MaintenanceMode'));
+server.use(lulu.use('app/middlewares/MaintenanceMode'));
 
-server.use(config.app.webRoute, require('./routes/web'));
-server.use(config.app.apiRoute, require('./routes/api'));
+server.use(config.app.webRoute, lulu.use('routes/web'));
+server.use(config.app.apiRoute, lulu.use('routes/api'));
 
 // Database Connection - MongoDB
-config.database.mongodb.use? require('./app/database/mongodb/MongooseConnection').connect() : null;
+config.database.mongodb.use? lulu.use('app/databases/mongodb/MongooseConnection').connect() : null;
 
 
 

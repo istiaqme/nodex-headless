@@ -31,6 +31,9 @@ const config = {
             username: process.env.MONGODB_USERNAME || null, // e.g. 'root', default is NULL
             password: process.env.MONGODB_PASSWORD || null, // e.g. 'password12345', default is NULL
             url: process.env.MONGODB_URL || null, // e.g. 'mongodb://localhost:27017/nodex_by_istiaq_hasan', default is NULL
+            modelsDir: process.env.MONGODB_MODELS_DIR || 'models/mongodb',
+            seederDir: process.env.MONGODB_SEEDER_DATASETS_DIR || 'seeders',
+            seederDatasetsDir: process.env.MONGODB_SEEDER_DATASETS_DIR || 'datasets',
         },
         mysql: {
             use: process.env.MYSQL_USE || false,
@@ -40,6 +43,19 @@ const config = {
             username: process.env.MYSQL_USERNAME || 'root',
             password: process.env.MYSQL_PASSWORD || '',
         }
+    },
+    namespaces: {
+        app: 'app',
+        controllers: 'app/controllers',
+        models: 'app/models',
+        middlewares: 'app/middlewares',
+        responses: 'app/responses',
+        errors: 'app/errors',
+        helpers: 'app/helpers',
+        services: 'app/services',
+        databases: 'app/databases',
+        routes: 'routes',
+        mongoose: 'app/databases/mongodb'
     }
 }
 

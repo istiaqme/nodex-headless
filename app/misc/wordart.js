@@ -21,7 +21,8 @@ const wordart = {
     ██  ██  ██    ██         ██ ██ ▄▄ ██ ██      
     ██      ██    ██    ███████  ██████  ███████ 
                                     ▀▀                                                
-    `
+    `,
+    redis: `Not Yet Implemented`,
 }
 
 module.exports = wordart;
