@@ -30,6 +30,7 @@ const config = {
             database: process.env.MONGODB_DATABASE || 'nodex_by_istiaq_hasan',
             username: process.env.MONGODB_USERNAME || null, // e.g. 'root', default is NULL
             password: process.env.MONGODB_PASSWORD || null, // e.g. 'password12345', default is NULL
+            url: process.env.MONGODB_URL || null, // e.g. 'mongodb://localhost:27017/nodex_by_istiaq_hasan', default is NULL
         },
         mysql: {
             use: process.env.MYSQL_USE || false,
