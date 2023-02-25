@@ -1,3 +1,4 @@
+require('dotenv').config();
 const config = {
     app: {
         name: process.env.APP_NAME || 'Nodex Headless Framework',
