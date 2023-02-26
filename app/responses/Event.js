@@ -24,7 +24,7 @@ module.exports = {
                     // to a specific client
                     lulu.context.ws.io.to(config.socketId).emit(eventName, data);
                 }
-                else if(volatile){
+                else if(config.volatile){
                     // to all clients in the current namespace except the sender
                     lulu.context.ws.socket.volatile.emit(eventName, data);
                 }

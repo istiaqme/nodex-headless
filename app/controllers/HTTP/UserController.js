@@ -16,7 +16,7 @@ module.exports = {
     list : async function (req, res) {
         try{
             const users = await UserService.list();
-            Event.emit('emitted/from/an/http/controller', response.build('User List Loaded', {users}, 200));
+            Event.emit('emitted/from/an/http/controller', response.build('User List Loaded', {users}, 200), {});
             return response.dispatch("Users Fetched Successfully", {users}, res, 200); // wrap data in object to avoid confusion
         }
         catch(error){
