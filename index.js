@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 /* Bootstrap - Server & Request Settings */
 
 /* Bootstrap - Application Level Middlewares */
-//app.use(lulu.use('app/middlewares/HTTPInit'));
+app.use(lulu.use('app/middlewares/HTTPInit'));
 app.use(lulu.use('app/middlewares/MaintenanceMode'));
 /* Bootstrap - Application Level Middlewares */
 
