@@ -9,10 +9,10 @@ module.exports = function(io) {
     io.on('connection', function(socket) {
         clients++;
         console.log('New client connected. Total Now: ' + chalk.green.bold(clients));
+        lulu.context.ws.io = io;
+        lulu.context.ws.socket = socket;
 
         socket.onAny((eventName, payload) => {
-            lulu.context.ws.io = io;
-            lulu.context.ws.socket = socket;
             lulu.context.ws.event = eventName;
             lulu.context.ws.payload = payload;
         })

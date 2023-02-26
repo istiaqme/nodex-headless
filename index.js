@@ -19,13 +19,14 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 /* Bootstrap - Server & Request Settings */
 
 /* Bootstrap - Application Level Middlewares */
+//app.use(lulu.use('app/middlewares/HTTPInit'));
 app.use(lulu.use('app/middlewares/MaintenanceMode'));
 /* Bootstrap - Application Level Middlewares */
 
 /* Bootstrap - Routes */
+config.app.socketIO? lulu.use('routes/socketio')(io) : null;
 app.use(config.app.webRoute, lulu.use('routes/web'));
 app.use(config.app.apiRoute, lulu.use('routes/api'));
-config.app.socketIO? lulu.use('routes/socketio')(io) : null;
 /* Bootstrap - Routes */
 
 // Database Connection - MongoDB

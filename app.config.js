@@ -20,7 +20,7 @@ const config = {
         port: process.env.PORT || 8001,
     },
     maintenance: {
-        ongoing: process.env.MAINTENANCE_ONGOING || true,
+        ongoing: process.env.MAINTENANCE_ONGOING || false,
         deadline: process.env.MAINTENANCE_DEADLINE || '2023-12-22T09:12:52.092Z',  // ISO Date format e.g. "2023-02-22T09:12:52.092Z"
         note: process.env.MAINTENANCE_NOTE || 'Regular Maintenance.' // A string if you have any note
     },
