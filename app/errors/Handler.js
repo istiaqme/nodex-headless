@@ -1,31 +1,31 @@
 const response = require('../responses/response');
 const {buildMessage, buildData} = require('./ErrorHelper');
-module.exports = function (error, res) {
+module.exports = function (error) {
     if(error instanceof require('./NotFoundError')){
-        response.dispatch(error.message, {}, res, 404);
+        return response.build(error.message, {}, 404);
     }
     else if(error instanceof require('./ValidationError')){
-        response.dispatch(error.message, {}, res, 400);
+        response.build(error.message, {}, 400);
     }
     else if(error instanceof require('./ResourceAlreadyExistsError')){
-        response.dispatch(error.message, {}, res, 403);
+        return response.build(error.message, {}, 403);
     }
     else if(error instanceof ReferenceError){
-        response.dispatch(buildMessage(error), buildData(error), res, 500);
+        return response.build(buildMessage(error), buildData(error), 500);
     }
     else if(error instanceof TypeError){
-        response.dispatch(buildMessage(error), buildData(error), res, 500);
+        return response.build(buildMessage(error), buildData(error), 500);
     }
     else if(error instanceof require('./JoiValidationError')){
-        response.dispatch(buildMessage(error), buildData(error), res, 400);
+        return response.build(buildMessage(error), buildData(error), 400);
     }
     else if(error instanceof require('./MaintenanceModeError')){
-        response.dispatch(error.message, {
+        return response.build(error.message, {
             deadline: error.deadline,
             note: error.note
-        }, res, 503);
+        }, 503);
     }
     else {
-        response.dispatch(buildMessage(error), buildData(error), res, 500);
+        return response.build(buildMessage(error), buildData(error), 500);
     }
 }

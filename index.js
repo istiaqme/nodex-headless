@@ -1,21 +1,32 @@
 require('./boot');
+const config = lulu.use('app.config');
 const express = require('express');
-const server = express();
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+    cors: config.app.corsOptions
+});
+
 require('dotenv').config();
 const cors = require('cors');
 const chalk = require('chalk');
-const config = lulu.use('app.config');
 const wordart = lulu.use('app/misc/wordart');
 
+/* Bootstrap - Server & Request Settings */
+app.use(cors(config.app.corsOptions));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({extended: true, limit: '50mb'}));
+/* Bootstrap - Server & Request Settings */
 
-server.use(cors(config.app.corsOptions));
-server.use(express.json({limit: '50mb'}));
-server.use(express.urlencoded({extended: true, limit: '50mb'}));
+/* Bootstrap - Application Level Middlewares */
+app.use(lulu.use('app/middlewares/MaintenanceMode'));
+/* Bootstrap - Application Level Middlewares */
 
-server.use(lulu.use('app/middlewares/MaintenanceMode'));
-
-server.use(config.app.webRoute, lulu.use('routes/web'));
-server.use(config.app.apiRoute, lulu.use('routes/api'));
+/* Bootstrap - Routes */
+app.use(config.app.webRoute, lulu.use('routes/web'));
+app.use(config.app.apiRoute, lulu.use('routes/api'));
+config.app.socketIO? lulu.use('routes/socketio')(io) : null;
+/* Bootstrap - Routes */
 
 // Database Connection - MongoDB
 config.database.mongodb.use? lulu.use('app/databases/mongodb/MongooseConnection').connect() : null;

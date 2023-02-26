@@ -8,6 +8,7 @@ const config = {
         debug: process.env.APP_DEBUG || true,
         webRoute: process.env.APP_WEB_ROUTE || '/',
         apiRoute: process.env.APP_API_ROUTE || '/api',
+        socketIO: process.env.APP_SOCKET_IO || true,
         corsOptions: {
             origin: '*',
             optionsSuccessStatus: 200,

@@ -5,12 +5,6 @@ module.exports = class ErrorResponse extends BaseResponse{
         this.kind = 'Error';
     }
 
-    getResponse(){
-        return {
-            kind : this.kind,
-            message : this.message,
-            data : this.data
-        }
-    }
+    
 
 }

@@ -3,6 +3,10 @@ const lulu = {
     config: require('./app.config'),
     join: {
         withBase: withBase
+    },
+    context: {
+        http: {},
+        ws: {}
     }
 }
 

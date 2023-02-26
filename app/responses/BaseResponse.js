@@ -3,6 +3,7 @@ module.exports = class BaseResponse{
         this.kind = 'Error';
         this.message = '';
         this.data = null;
+        this.code = null;
     }
 
     setKind(kind){
@@ -16,6 +17,19 @@ module.exports = class BaseResponse{
     setData(data){
         this.data = {...data};
         return this;
+    }
+    setCode(code){
+        this.code = code;
+        return this;
+    }
+
+    getResponse(){
+        return {
+            code : this.code,
+            kind : this.kind,
+            message : this.message,
+            data : this.data
+        }
     }
 
     

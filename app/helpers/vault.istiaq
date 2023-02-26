@@ -1,0 +1,30 @@
+let eventParam = null;
+            if(eventName.includes(':')){
+                let splittedEventName = eventName.split(':');
+                let baseEventName = splittedEventName[0];
+                eventParam = splittedEventName[splittedEventName.length - 1];
+                //baseEventName = eventName.slice(0, eventName.length - 1).join(':');
+                
+                console.log('Event Param: ' + eventParam);
+                console.log('Event Name: ' + baseEventName);
+                console.log(Object.keys(socket._events));
+                console.log('Events: ' + Array.isArray(Object.keys(socket._events)));
+                let listedRoute = Object.keys(socket._events).find((event) => {
+                    return event.startsWith(baseEventName);
+                });
+                if(listedRoute){
+                    socket._events[eventName] = socket._events[listedRoute] ;
+                }
+                console.log('Listed Route: ' + listedRoute);
+                console.log(socket._events);
+            }
+
+
+
+            if (!Object.keys(socket._events).includes(eventName)) {
+                const errorResponse = new ErrorResponse();
+                errorResponse.setMessage('This event is not registered.').setData({payload}).setCode(404);
+                return io.emit('LULU_EVENT_UNREGISTERED', errorResponse.getResponse());
+            }
+
+

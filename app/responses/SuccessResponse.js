@@ -4,12 +4,5 @@ module.exports = class SuccessResponse extends BaseResponse{
         super();
         this.kind = 'Success';
     }
-    
-    getResponse(){
-        return {
-            kind : this.kind,
-            message : this.message,
-            data : this.data
-        }
-    }
+
 }

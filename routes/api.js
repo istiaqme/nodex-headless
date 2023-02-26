@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
-const UserController = require('../app/controllers/UserController');
+/* Controllers */
+const UserController = lulu.use('app/controllers/HTTP/UserController');
+/* Controllers */
 /* Request Validator Middlewares */
-const UserRegistrationRequest = require('../app/requests/UserRegistrationRequest');
+const UserRegistrationRequest = lulu.use('app/requests/UserRegistrationRequest');
+/* Request Validator Middlewares */
 
 router.get('/', (req, res) => {
     res.send("Hi From API");

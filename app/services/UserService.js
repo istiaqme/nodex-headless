@@ -14,7 +14,7 @@ async function details (id) {
     if(!db.isValidObjectId(id)){
         return null;
     } // return null if id is not valid ObjectId to avoid error in mongoose.
-    
+    console.log(id);
     return await User.findOne({_id: id});
 }
 
