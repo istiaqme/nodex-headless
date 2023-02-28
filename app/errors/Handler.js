@@ -5,7 +5,7 @@ module.exports = function (error) {
         return response.build(error.message, {}, 404);
     }
     else if(error instanceof require('./ValidationError')){
-        response.build(error.message, {}, 400);
+        return response.build(error.message, {}, 400);
     }
     else if(error instanceof require('./ResourceAlreadyExistsError')){
         return response.build(error.message, {}, 403);

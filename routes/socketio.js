@@ -8,7 +8,7 @@ module.exports = function(io) {
     let clients = 0;
     io.on('connection', function(socket) {
         clients++;
-        console.log('New client connected. Total Now: ' + chalk.green.bold(clients));
+        console.log('Socket IO :: New client connected. Total Now: ' + chalk.green.bold(clients));
         lulu.context.ws.io = io;
         lulu.context.ws.socket = socket;
 
@@ -34,7 +34,7 @@ module.exports = function(io) {
 
         socket.on('disconnect', function() {
             clients--;
-            console.log('A client disconnected. Now Total: ' + chalk.red.bold(clients));
+            console.log('Socket IO :: A client disconnected. Now Total: ' + chalk.red.bold(clients));
         });
 
         
